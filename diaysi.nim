@@ -10,10 +10,10 @@ import terminal
 import strutils
 import os
 
-# Duration to show each number
+# Show each number for this duration
 let duration = 800
 
-# Time to wait before showing the next number
+# Wait before showing the next number
 let gap = 350
 
 proc show(num: int) =
@@ -23,7 +23,7 @@ proc show(num: int) =
   sleep duration
 
   for i in 1..num_str.len:
-    stdout.write("\b \b")
+    stdout.write "\b \b"
 
   stdout.flushFile()
   sleep gap
