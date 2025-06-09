@@ -14,6 +14,8 @@ And an experiment to put AI to work with Nim.
 
 Suggested spawn method:
 
-```sh
-xterm -fa "Monospace" -fs 44 -geometry 2x1 -e "diaysi; exit"
+```lua
+function Utils.diaysi()
+	Utils.spawn("urxvt -fn 'xft:Monospace:pixelsize=44' -geometry 2x1 -e 'diaysi'")
+end
 ```
