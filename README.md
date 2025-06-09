@@ -11,5 +11,3 @@ And an experiment to put AI to work with Nim.
 ### It is temporary information.
 
 ![](info.gif)
-
-![](https://i.imgur.com/zLMAqCx.jpeg)
