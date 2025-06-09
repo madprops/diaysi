@@ -1,5 +1,3 @@
-# I want to make a replacement of linux's date command/program.
-# To output date. however there are some rules.
 # When the program is called, it will show the HOUR (H).
 # Then it will delete that after x milliseconds.
 # Then it will print the MINUTES (M) for x milliseconds.
@@ -9,56 +7,34 @@
 
 import times
 import terminal
+import strutils
 import os
 
-let delay = 1000  # milliseconds to display each part
+let delay = 1000
+
+proc show(num: int) =
+  let snum = align($num, 2, '0')
+  stdout.write snum
+  stdout.flushFile()
+  sleep(delay)
+
+  for i in 1..snum.len:
+    stdout.write("\b \b")
+
+  stdout.flushFile()
 
 proc main() =
-  # Get current time
-  let currentTime = now()
-  let hour = currentTime.hour
-  let minute = currentTime.minute
-  let second = currentTime.second
+  let time = now()
+  let hour = time.hour
+  let minutes = time.minute
+  let seconds = time.second
 
-  # Initialize terminal
   hideCursor()
-
-  # Display hour
-  stdout.write $hour
-  stdout.flushFile()
-  sleep(delay)
-
-  # Clear just the number, not the whole line
-  let digits = ($hour).len
-
-  for i in 1..digits:
-    stdout.write("\b \b")
-
-  stdout.flushFile()
-
-  # Display minute
-  stdout.write $minute
-  stdout.flushFile()
-  sleep(delay)
-
-  # Clear minute
-  let minuteDigits = ($minute).len
-  for i in 1..minuteDigits:
-    stdout.write("\b \b")
-  stdout.flushFile()
-
-  # Display second
-  stdout.write $second
-  stdout.flushFile()
-  sleep(delay)
-
-  # Clear second and restore cursor
-  let secondDigits = ($second).len
-
-  for i in 1..secondDigits:
-    stdout.write("\b \b")
-
-  stdout.flushFile()
+  # ---
+  show hour
+  show minutes
+  show seconds
+  # ---
   showCursor()
 
 when isMainModule:
