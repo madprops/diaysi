@@ -19,3 +19,11 @@ function Utils.diaysi()
 	Utils.spawn("urxvt -fn 'xft:Monospace:pixelsize=44' -geometry 2x1 -e 'diaysi'")
 end
 ```
+
+![](diay.gif)
+
+---
+
+It's time to start making your own implementation of (some) 'critical' components of your system.
+
+Use AI to make image viewers in rust, or nim, or c.
