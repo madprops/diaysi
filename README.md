@@ -11,3 +11,9 @@ And an experiment to put AI to work with Nim.
 ### It is temporary information.
 
 ![](info.gif)
+
+Suggested spawn method:
+
+```sh
+xterm -fa "Monospace" -fs 44 -geometry 2x1 -e "diaysi; exit"
+```
