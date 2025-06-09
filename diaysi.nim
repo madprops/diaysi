@@ -16,16 +16,19 @@ let duration = 800
 # Wait before showing the next number
 let gap = 350
 
+proc flush() =
+  stdout.flush_file()
+
 proc show(num: int) =
   let num_str = align($num, 2, '0')
   stdout.write num_str
-  stdout.flushFile()
+  flush()
   sleep duration
 
   for i in 1..num_str.len:
     stdout.write "\b \b"
 
-  stdout.flushFile()
+  flush()
 
 proc main() =
   let time = now()
@@ -33,7 +36,7 @@ proc main() =
   let minutes = time.minute
   let seconds = time.second
 
-  hideCursor()
+  hide_cursor()
 
   # Hour
   show hour
@@ -46,7 +49,7 @@ proc main() =
   # Seconds
   show seconds
 
-  showCursor()
+  show_cursor()
 
-when isMainModule:
+when is_main_module:
   main()
