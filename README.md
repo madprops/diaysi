@@ -10,4 +10,6 @@ And an experiment to put AI to work with Nim.
 ### Then it will clear it as well or exit.
 ### It is temporary information.
 
+![](info.gif)
+
 ![](https://i.imgur.com/zLMAqCx.jpeg)
