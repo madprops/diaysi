@@ -13,12 +13,12 @@ import os
 let delay = 1000
 
 proc show(num: int) =
-  let snum = align($num, 2, '0')
-  stdout.write snum
+  let num_str = align($num, 2, '0')
+  stdout.write num_str
   stdout.flushFile()
   sleep(delay)
 
-  for i in 1..snum.len:
+  for i in 1..num_str.len:
     stdout.write("\b \b")
 
   stdout.flushFile()
