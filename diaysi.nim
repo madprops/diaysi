@@ -26,7 +26,6 @@ proc show(num: int) =
     stdout.write "\b \b"
 
   stdout.flushFile()
-  sleep gap
 
 proc main() =
   let time = now()
@@ -35,11 +34,18 @@ proc main() =
   let seconds = time.second
 
   hideCursor()
-  # ---
+
+  # Hour
   show hour
+  sleep gap
+
+  # Minutes
   show minutes
+  sleep gap
+
+  # Seconds
   show seconds
-  # ---
+
   showCursor()
 
 when isMainModule:
