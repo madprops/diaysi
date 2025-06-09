@@ -10,18 +10,23 @@ import terminal
 import strutils
 import os
 
-let delay = 1000
+# Duration to show each number
+let duration = 800
+
+# Time to wait before showing the next number
+let gap = 350
 
 proc show(num: int) =
   let num_str = align($num, 2, '0')
   stdout.write num_str
   stdout.flushFile()
-  sleep(delay)
+  sleep duration
 
   for i in 1..num_str.len:
     stdout.write("\b \b")
 
   stdout.flushFile()
+  sleep gap
 
 proc main() =
   let time = now()
