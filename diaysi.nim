@@ -28,8 +28,14 @@ proc flush() =
 proc get_num_str(num: int): string =
   return align($num, 2, '0')
 
-# Method with shell flash
-proc show_1(num: int) =
+proc get_time(): (int, int, int) =
+  let time = now()
+  let hour = time.hour
+  let minutes = time.minute
+  let seconds = time.second
+  return (hour, minutes, seconds)
+
+proc do_show_1(num: int) =
   let num_str = get_num_str(num)
   stdout.write num_str
   flush()
@@ -40,24 +46,32 @@ proc show_1(num: int) =
 
   flush()
 
-# Method with popup notifications
-proc show_2(num: int) =
-  let num_str = get_num_str(num)
-  discard execCmd(fmt"notify-send '{num_str}'")
+# Method with shell flash
+proc show_1() =
+  let (hour, minutes, seconds) = get_time()
 
-proc show(num: int) =
-  if show_method == 1:
-    show_1(num)
-  elif show_method == 2:
-    show_2(num)
+  hide_cursor()
+
+  # Hour
+  do_show_1 hour
+  sleep gap
+
+  # Minutes
+  do_show_1 minutes
+  sleep gap
+
+  # Seconds
+  do_show_1 seconds
+
+  show_cursor()
+
+# Method with popup notifications
+proc show_2() =
+  let (hour, minutes, seconds) = get_time()
+  let stime = fmt"{get_num_str(hour)} : {get_num_str(minutes)} : {get_num_str(seconds)}"
+  discard execCmd(fmt"notify-send '{stime}'")
 
 proc main() =
-  let time = now()
-  let hour = time.hour
-  let minutes = time.minute
-  let seconds = time.second
-
-  # Get the first argument if any
   let args = commandLineParams()
 
   if args.len > 0:
@@ -66,20 +80,10 @@ proc main() =
     if arg == "2":
       show_method = 2
 
-  hide_cursor()
-
-  # Hour
-  show hour
-  sleep gap
-
-  # Minutes
-  show minutes
-  sleep gap
-
-  # Seconds
-  show seconds
-
-  show_cursor()
+  if show_method == 1:
+    show_1()
+  elif show_method == 2:
+    show_2()
 
 when is_main_module:
   main()
