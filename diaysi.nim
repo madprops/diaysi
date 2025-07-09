@@ -35,6 +35,15 @@ proc get_time(): (int, int, int) =
   let seconds = time.second
   return (hour, minutes, seconds)
 
+proc colon_string(args: varargs[int]): string =
+  result = ""
+
+  for i, num in args:
+    if i > 0:
+      result.add " : "
+
+    result.add get_num_str(num)
+
 proc do_show_1(num: int) =
   let num_str = get_num_str(num)
   stdout.write num_str
@@ -68,7 +77,7 @@ proc show_1() =
 # Method with popup notifications
 proc show_2() =
   let (hour, minutes, seconds) = get_time()
-  let stime = fmt"{get_num_str(hour)} : {get_num_str(minutes)} : {get_num_str(seconds)}"
+  let stime = colon_string(hour, minutes, seconds)
   discard execCmd(fmt"notify-send '{stime}'")
 
 proc main() =
