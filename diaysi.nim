@@ -69,15 +69,12 @@ proc show_1() =
   do_show_1 minutes
   sleep gap
 
-  # Seconds
-  do_show_1 seconds
-
   show_cursor()
 
 # Method with popup notifications
 proc show_2() =
   let (hour, minutes, seconds) = get_time()
-  let stime = colon_string(hour, minutes, seconds)
+  let stime = colon_string(hour, minutes)
   discard execCmd(fmt"notify-send '{stime}'")
 
 proc main() =
